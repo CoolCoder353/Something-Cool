@@ -1,0 +1,5 @@
+The current problem is that the server is changing who it thinks owns the server half way through 
+spawning it, the image labled "the problem" shows where this is happening
+
+
+also built leave button does not work -> needs fixing in future
