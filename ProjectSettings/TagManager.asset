@@ -11,6 +11,7 @@ TagManager:
   - Quit
   - SpawnSpot
   - Resource
+  - IPAddress
   layers:
   - Default
   - TransparentFX

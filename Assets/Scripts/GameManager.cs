@@ -18,6 +18,7 @@ public class GameManager : NetworkManager
 
     public GameManagerSettings settings;
 
+
     private NetworkIdentity localPlayer;
 
     /// <summary>
@@ -122,6 +123,8 @@ public class GameManager : NetworkManager
         base.OnClientConnect();
         NetworkClient.AddPlayer();
         localPlayer = NetworkClient.localPlayer;
+
+
         //CreatePlayerMessage characterMessage = new CreatePlayerMessage();
         //NetworkClient.Send(characterMessage);
     }
@@ -209,6 +212,15 @@ public class GameManager : NetworkManager
 
     }
 
+    public void ConnectToServerThroughUI()
+    {
+        if (!NetworkClient.active)
+        {
+            networkAddress = GameObject.FindWithTag("IPAddress").GetComponent<InputField>().text;
+            StartClient();
+        }
+    }
+
     /// <summary>
     /// Connects to a server at localhost for debugging purposes.
     /// </summary>
@@ -276,7 +288,7 @@ public class GameManager : NetworkManager
         if (GameObject.FindWithTag("Join"))
         {
             // Set the join button to be interactable
-            GameObject.FindWithTag("Join").GetComponent<Button>().onClick.AddListener(ConnectToServerDebug);
+            GameObject.FindWithTag("Join").GetComponent<Button>().onClick.AddListener(ConnectToServerThroughUI);
         }
 
         // If we can find any object with the tag 'Leave'

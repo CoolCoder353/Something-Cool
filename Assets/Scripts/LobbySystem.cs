@@ -16,6 +16,8 @@ public class LobbySystem : MonoBehaviour
     public GameObject lobbyPlayerUI;
     public GameObject lobbyPlayerPrefab;
 
+    public GameObject joinIPPrefab;
+
 
     // List of ClientPlayer objects representing the players in the lobby, in order
     public Dictionary<NetworkIdentity, ClientPlayer> ClientPlayers = new Dictionary<NetworkIdentity, ClientPlayer>();
@@ -147,7 +149,7 @@ public class LobbySystem : MonoBehaviour
         }
         if (player.ClientCanEdit())
         {
-            Debug.LogWarning("Dont set the text of yourself");
+            ////Debug.LogWarning("Dont set the text of yourself");
             return;
         }
 
