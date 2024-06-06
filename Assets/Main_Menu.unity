@@ -2082,7 +2082,7 @@ GameObject:
   - component: {fileID: 1180142127}
   m_Layer: 5
   m_Name: Ui Scripts
-  m_TagString: Untagged
+  m_TagString: LobbyManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2124,7 +2124,8 @@ MonoBehaviour:
   lobbyPlayerUI: {fileID: 1406632280}
   lobbyPlayerPrefab: {fileID: 3843788224161186116, guid: cf533c0fce0cc304d8b7622cd6640ebc,
     type: 3}
-  joinIPPrefab: {fileID: 0}
+  joinIPPrefab: {fileID: 1351502785}
+  joinIPButton: {fileID: 1369411097}
   core: {fileID: 0}
 --- !u!1 &1204165484
 GameObject:

@@ -12,6 +12,7 @@ TagManager:
   - SpawnSpot
   - Resource
   - IPAddress
+  - LobbyManager
   layers:
   - Default
   - TransparentFX

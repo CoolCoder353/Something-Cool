@@ -18,6 +18,8 @@ public class LobbySystem : MonoBehaviour
 
     public GameObject joinIPPrefab;
 
+    public GameObject joinIPButton;
+
 
     // List of ClientPlayer objects representing the players in the lobby, in order
     public Dictionary<NetworkIdentity, ClientPlayer> ClientPlayers = new Dictionary<NetworkIdentity, ClientPlayer>();

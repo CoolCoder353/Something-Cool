@@ -216,6 +216,7 @@ public class GameManager : NetworkManager
     {
         if (!NetworkClient.active)
         {
+            Debug.Log($"Connecting to server at '{GameObject.FindWithTag("IPAddress").GetComponent<InputField>().text}'");
             networkAddress = GameObject.FindWithTag("IPAddress").GetComponent<InputField>().text;
             StartClient();
         }
@@ -280,17 +281,27 @@ public class GameManager : NetworkManager
         // If we can find any object with the tag 'Host'
         if (GameObject.FindWithTag("Host"))
         {
-            Debug.Log("Found host");
+            ////Debug.Log("Found host");
             // Set the host button to be interactable
             GameObject.FindWithTag("Host").GetComponent<Button>().onClick.AddListener(HostServer);
         }
         // If we can find any object with the tag 'Join'
         if (GameObject.FindWithTag("Join"))
         {
+            Debug.Log("Found join");
             // Set the join button to be interactable
             GameObject.FindWithTag("Join").GetComponent<Button>().onClick.AddListener(ConnectToServerThroughUI);
         }
-
+        // If we can find any object with the tag 'LobbyManager'
+        if (GameObject.FindWithTag("LobbyManager"))
+        {
+            Debug.Log("Found LobbyManager");
+            // Set the join button to be interactable
+            Button button = GameObject.FindWithTag("LobbyManager").GetComponent<LobbySystem>().joinIPButton.GetComponent<Button>();
+            button.gameObject.transform.parent.gameObject.SetActive(true);
+            button.onClick.AddListener(ConnectToServerThroughUI);
+            button.gameObject.transform.parent.gameObject.SetActive(true);
+        }
         // If we can find any object with the tag 'Leave'
         if (GameObject.FindWithTag("Leave"))
         {
