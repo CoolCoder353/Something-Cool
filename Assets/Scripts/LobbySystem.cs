@@ -82,6 +82,11 @@ public class LobbySystem : MonoBehaviour
 
         TMP_InputField input_field = lobbyPlayer.GetComponentInChildren<TMP_InputField>();
 
+        Debug.Log(lobbyPlayer);
+        Debug.Log(input_field);
+
+        input_field.gameObject.SetActive(false);
+
         if (addNicknameListener)
         {
             // Add a listener to the nickname input field to update the player's nickname when it changes
@@ -90,6 +95,8 @@ public class LobbySystem : MonoBehaviour
                  player.CmdSetNickname(newNickname);
              });
             input_field.text = player.nickname;
+            lobbyPlayer.GetComponentInChildren<TMP_Text>().gameObject.SetActive(false);
+            input_field.gameObject.SetActive(true);
         }
         if (addStartGameListener)
         {
@@ -136,6 +143,11 @@ public class LobbySystem : MonoBehaviour
         if (newNickname == null || newNickname == string.Empty)
         {
             Debug.LogError("New nickname is null");
+            return;
+        }
+        if (player.ClientCanEdit())
+        {
+            Debug.LogWarning("Dont set the text of yourself");
             return;
         }
 
