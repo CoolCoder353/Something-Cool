@@ -20,6 +20,8 @@ public class LobbySystem : MonoBehaviour
 
     public GameObject joinIPButton;
 
+    public TMP_InputField joinIPInputField;
+
 
     // List of ClientPlayer objects representing the players in the lobby, in order
     public Dictionary<NetworkIdentity, ClientPlayer> ClientPlayers = new Dictionary<NetworkIdentity, ClientPlayer>();

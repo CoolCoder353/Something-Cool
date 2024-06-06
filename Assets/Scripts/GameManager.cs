@@ -216,8 +216,7 @@ public class GameManager : NetworkManager
     {
         if (!NetworkClient.active)
         {
-            Debug.Log($"Connecting to server at '{GameObject.FindWithTag("IPAddress").GetComponent<InputField>().text}'");
-            networkAddress = GameObject.FindWithTag("IPAddress").GetComponent<InputField>().text;
+            networkAddress = GameObject.FindWithTag("LobbyManager").GetComponent<LobbySystem>().joinIPInputField.text;
             StartClient();
         }
     }
@@ -300,7 +299,7 @@ public class GameManager : NetworkManager
             Button button = GameObject.FindWithTag("LobbyManager").GetComponent<LobbySystem>().joinIPButton.GetComponent<Button>();
             button.gameObject.transform.parent.gameObject.SetActive(true);
             button.onClick.AddListener(ConnectToServerThroughUI);
-            button.gameObject.transform.parent.gameObject.SetActive(true);
+            button.gameObject.transform.parent.gameObject.SetActive(false);
         }
         // If we can find any object with the tag 'Leave'
         if (GameObject.FindWithTag("Leave"))
