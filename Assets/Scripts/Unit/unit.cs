@@ -3,18 +3,23 @@ using Mirror;
 
 public class Unit : MonoBehaviour
 {
+    public float speed = 1.0f;
+    public float turningSpeed = 1.0f;
+    public bool autoAttack = true;
 
 
-    //<summary>
-    // Calculate a path from points A to B, using a grid locking system to stop units from walking into each other.
-    // Used so units can pathfind to their destination.
-    //</summary>
-    public static void CalculatePath(Vector3 start, Vector3 end)
+    private Vector2 goalPosition;
+    private float tolerance = 0.1f;
+
+
+    public void SetGoalPosition(Vector2 position)
     {
-        Debug.Log("Calculating path from " + start + " to " + end);
-
-
+        goalPosition = position;
 
     }
+
+
+
+
 
 }
