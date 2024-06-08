@@ -1,7 +1,7 @@
 using UnityEngine;
 using Mirror;
 
-public class Unit : MonoBehaviour
+public class Unit
 {
     public float speed = 1.0f;
     public float turningSpeed = 1.0f;
@@ -10,6 +10,8 @@ public class Unit : MonoBehaviour
 
     private Vector2 goalPosition;
     private float tolerance = 0.1f;
+
+    public float radius = 0.5f;
 
 
     public void SetGoalPosition(Vector2 position)
