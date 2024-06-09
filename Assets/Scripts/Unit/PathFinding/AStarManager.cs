@@ -204,8 +204,9 @@ public class AStarManager : MonoBehaviour
                     Gizmos.color = Color.green;
                     Gizmos.DrawSphere(new Vector3(tile.position.x, tile.position.y, gameObject.transform.position.z) + new Vector3(0.5f, 0.5f, 0), 0.09f);
                     //Draw a number on the tile for its cost score
+#if UNITY_EDITOR
                     UnityEditor.Handles.Label(new Vector3(tile.position.x, tile.position.y, gameObject.transform.position.z), tile.costScore.ToString());
-
+#endif
                 }
 
                 for (int i = 0; i < iteralble.closedSet.Count; i++)
@@ -213,9 +214,10 @@ public class AStarManager : MonoBehaviour
                     TileData tile = iteralble.closedSet.Dequeue();
                     Gizmos.color = Color.red;
                     Gizmos.DrawSphere(new Vector3(tile.position.x, tile.position.y, gameObject.transform.position.z) + new Vector3(0.5f, 0.5f, 0), 0.09f);
-                    //Draw a number on the tile for its cost score
-                    UnityEditor.Handles.Label(new Vector3(tile.position.x, tile.position.y, gameObject.transform.position.z), tile.costScore.ToString());
 
+#if UNITY_EDITOR    //Draw a number on the tile for its cost score
+                    UnityEditor.Handles.Label(new Vector3(tile.position.x, tile.position.y, gameObject.transform.position.z), tile.costScore.ToString());
+#endif
                 }
             }
         }
@@ -237,8 +239,10 @@ public class AStarManager : MonoBehaviour
                 {
                     Gizmos.color = Color.red;
                 }
+#if UNITY_EDITOR
                 //Draw a number on the tile for its cost score
                 UnityEditor.Handles.Label(new Vector3(tile.Key.x, tile.Key.y, gameObject.transform.position.z) + new Vector3(0.5f, 0.5f, 0), tile.Value.costScore.ToString());
+#endif
             }
         }
 

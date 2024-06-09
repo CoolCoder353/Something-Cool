@@ -33,7 +33,7 @@ public class ServerData
 {
     public float resources = 0;
 
-    List<UnitGroup> unitGroups = new List<UnitGroup>();
+    List<Unit> units = new List<Unit>();
 
     public static string Serialize(ServerData data)
     {

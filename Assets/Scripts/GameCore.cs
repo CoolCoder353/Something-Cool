@@ -20,7 +20,6 @@ public class GameCore : NetworkBehaviour
     /// </summary>
     public Dictionary<NetworkIdentity, ServerPlayer> ServerPlayers = new Dictionary<NetworkIdentity, ServerPlayer>();
 
-
     /// <summary>
     /// NetworkConnection object representing the owner of the server.
     /// </summary>
@@ -49,8 +48,6 @@ public class GameCore : NetworkBehaviour
 
 
 
-
-
     //<summary>
     //Sends the individual player's server player object to each client
     [Server]
@@ -65,6 +62,8 @@ public class GameCore : NetworkBehaviour
         }
     }
 
+
+
     [ServerCallback]
     public void LateUpdate()
     {
@@ -73,6 +72,7 @@ public class GameCore : NetworkBehaviour
         {
             UpdateClientsPrivateData();
         }
+
     }
 
 

@@ -119,7 +119,7 @@ public class TestUnitManager : MonoBehaviour
             {
                 GameObject unitObject = Instantiate(UnitPrefab, unitStartPosition, Quaternion.identity);
 
-                Unit unit = new Unit(unitObject);
+                Unit unit = new Unit();
                 unit.radius = Random.Range(0.5f, 1f);
 
                 testGroup.units.Add(unit);

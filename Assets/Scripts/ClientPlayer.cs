@@ -1,3 +1,4 @@
+using System;
 using Mirror;
 using UnityEngine;
 
@@ -116,5 +117,14 @@ public class ClientPlayer : NetworkBehaviour
         }
         lobbySystem.UpdateClientPlayerNickname(this, newNickname);
 
+    }
+
+    [Command]
+    public void CmdMoveUnits(UnitGroup selectedUnits, Vector2 realPoint)
+    {
+        // Check if the player has authority over the selected units
+        Debug.Log("Moving units on server");
+
+        selectedUnits.SetGoalPosition(realPoint, 2.0f);
     }
 }

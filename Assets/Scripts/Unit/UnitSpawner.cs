@@ -22,10 +22,14 @@ public class UnitSpawner : NetworkBehaviour
     }
 
     [Command(requiresAuthority = false)]
-    private void CmdSpawnUnit()
+    private void CmdSpawnUnit(NetworkConnectionToClient connectionToClient = null)
     {
         GameObject unitInstance = Instantiate(unitPrefab, spawnPoint.position, spawnPoint.rotation);
+
         NetworkServer.Spawn(unitInstance, connectionToClient);
+
+
+
         Debug.Log("Spanwed unit ");
     }
 

@@ -1,17 +1,14 @@
 using UnityEngine;
 using Mirror;
 using System.Collections.Generic;
-using NaughtyAttributes;
-using Mono.CompilerServices.SymbolWriter;
+
 
 [System.Serializable]
-public class Unit
+public class Unit : NetworkBehaviour
 {
     public float speed = 1.0f;
     public float turningSpeed = 1.0f;
     public bool autoAttack = true;
-
-    public GameObject gameObject;
 
     public float RotationOffset = 90;
     private Vector2 goalPosition;
@@ -23,14 +20,6 @@ public class Unit
     public bool debug = false;
     public Vector2 DebugGoalPosition;
 
-    public Unit(GameObject gameObject)
-    {
-        this.gameObject = gameObject;
-    }
-    public Unit()
-    {
-
-    }
 
     [Server]
     public void SetGoalPosition(Vector2 position, Vector2 offset = default)
@@ -41,6 +30,16 @@ public class Unit
         path = AStarManager.Instance.GetPath(pos, goalPosition);
 
     }
+
+    [ServerCallback]
+    public void Update()
+    {
+        MoveWithVelocity();
+    }
+
+
+
+
     [Server]
     public void Move()
     {
@@ -163,7 +162,7 @@ public class Unit
         Vector2 currentPosition = rb.position;
         if (path == null || path.Count == 0)
         {
-            Debug.LogWarning("No path to follow");
+
             if (debug && !(Vector2.Distance(currentPosition, DebugGoalPosition) < tolerance))
             {
                 SetGoalPosition(DebugGoalPosition);
