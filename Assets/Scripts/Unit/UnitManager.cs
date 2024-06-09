@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using NaughtyAttributes;
-using Unity.VisualScripting;
 using UnityEngine;
+
 
 public struct UnitGoal
 {
@@ -9,6 +9,7 @@ public struct UnitGoal
     public float radius;
 }
 
+[System.Serializable]
 public class UnitGroup
 {
     public List<Unit> units = new List<Unit>();
@@ -35,7 +36,6 @@ public class UnitGroup
             goals.Add(goal);
 
             unit.SetGoalPosition(goal.position);
-            Debug.Log("Unit " + i + " is at " + goal.position + " with a radius of " + totalRadius);
             i++;
         }
 
@@ -52,17 +52,28 @@ public class UnitManager : MonoBehaviour
     [ShowIf("showGizmos")]
     public bool showTestPoints = true;
 
-    [ShowIf("showTestPoints")]
+    [ShowIf("showGizmos")]
+    public bool showPath = true;
+
+    [ShowIf("showPath"), ShowAssetPreview(128, 128)]
+    public GameObject UnitPrefab;
+
+    [ShowIf("debugMode")]
     public int numberOfTestPoints = 100;
 
-    [ShowIf("showTestPoints")]
+    [ShowIf("debugMode")]
     public float spacingFactor = 1.0f;
 
-    [ShowIf("showTestPoints")]
+    [ShowIf("showPath")]
+    public Vector3 unitStartPosition = new Vector3(0, 0, 0);
+
+    [ShowIf("debugMode")]
     public Vector2Int TestGoalPosition = new Vector2Int(0, 0);
 
 
-    private UnitGroup testGroup = new UnitGroup();
+
+
+    public UnitGroup testGroup = new UnitGroup();
 
     [ShowIf("showTestPoints"), Button("Test Point Spreading")]
     public void TestPointSpreading()
@@ -88,7 +99,41 @@ public class UnitManager : MonoBehaviour
 
     }
 
+    [ShowIf("showPath"), Button("Test Pathfinding")]
+    public void TestUnitMovement()
+    {
+        if (testGroup.units.Count > numberOfTestPoints)
+        {
+            testGroup.units.Clear();
+        }
+        if (testGroup.units.Count < numberOfTestPoints)
+        {
+            for (int i = 0; i < numberOfTestPoints; i++)
+            {
+                GameObject unitObject = Instantiate(UnitPrefab, unitStartPosition, Quaternion.identity);
 
+                Unit unit = new Unit(unitObject);
+                unit.radius = Random.Range(0.5f, 1f);
+
+                testGroup.units.Add(unit);
+            }
+        }
+        testGroup.SetGoalPosition(TestGoalPosition, spacingFactor);
+
+    }
+
+
+    public void Update()
+    {
+        if (showPath)
+        {
+            foreach (Unit unit in testGroup.units)
+            {
+                unit.MoveWithVelocity();
+            }
+
+        }
+    }
     public void OnDrawGizmosSelected()
     {
         if (showGizmos)
@@ -105,6 +150,13 @@ public class UnitManager : MonoBehaviour
 
                     Gizmos.DrawSphere(new(goal.position.x, goal.position.y, 0), goal.radius);
                 }
+            }
+            if (showPath)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(new Vector3(TestGoalPosition.x, TestGoalPosition.y, 0) + new Vector3(0.5f, 0.5f, 0), 1.0f);
+
+
             }
         }
     }

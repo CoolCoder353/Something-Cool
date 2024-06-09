@@ -167,10 +167,10 @@ public static class AStar
             new Vector2Int(position.x - 1, position.y),
             new Vector2Int(position.x, position.y + 1),
             new Vector2Int(position.x, position.y - 1),
-            new Vector2Int(position.x + 1, position.y + 1),
-            new Vector2Int(position.x - 1, position.y - 1),
-            new Vector2Int(position.x + 1, position.y - 1),
-            new Vector2Int(position.x - 1, position.y + 1)
+             new Vector2Int(position.x + 1, position.y + 1),
+             new Vector2Int(position.x - 1, position.y - 1),
+             new Vector2Int(position.x + 1, position.y - 1),
+             new Vector2Int(position.x - 1, position.y + 1)
         };
 
         return neighbours;

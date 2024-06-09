@@ -47,6 +47,8 @@ public class AStarManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+
+        Bake();
     }
 
     [Button("ReCalculatePath"), ShowIf("showPath")]
@@ -60,6 +62,7 @@ public class AStarManager : MonoBehaviour
     [Button("Bake")]
     public void Bake()
     {
+        Instance = this;
         Dictionary<Vector2Int, TileData> visibleTiles = new Dictionary<Vector2Int, TileData>();
         // Iterate over walkable tilemaps
         foreach (Tilemap tilemap in WalkableTilemaps)
@@ -118,6 +121,24 @@ public class AStarManager : MonoBehaviour
                             tileData.sortingOrder = renderer.sortingOrder;
 
                             visibleTiles[localPlace] = tileData;
+                        }
+
+                        // After setting a tile as unwalkable, iterate over its neighbors
+                        for (int dx = -1; dx <= 1; dx++)
+                        {
+                            for (int dy = -1; dy <= 1; dy++)
+                            {
+                                // Skip the tile itself
+                                if (dx == 0 && dy == 0) continue;
+
+                                Vector2Int neighborPlace = new Vector2Int(localPlace.x + dx, localPlace.y + dy);
+
+                                // If the neighbor tile is walkable and exists in visibleTiles, set its cost to 12
+                                if (visibleTiles.ContainsKey(neighborPlace) && visibleTiles[neighborPlace].IsWalkable)
+                                {
+                                    visibleTiles[neighborPlace].costScore = 12;
+                                }
+                            }
                         }
                     }
                 }
@@ -216,7 +237,7 @@ public class AStarManager : MonoBehaviour
                     Gizmos.color = Color.red;
                 }
                 //Draw a number on the tile for its cost score
-                UnityEditor.Handles.Label(new Vector3(tile.Key.x, tile.Key.y, gameObject.transform.position.z), tile.Value.costScore.ToString());
+                UnityEditor.Handles.Label(new Vector3(tile.Key.x, tile.Key.y, gameObject.transform.position.z) + new Vector3(0.5f, 0.5f, 0), tile.Value.costScore.ToString());
             }
         }
 
@@ -224,7 +245,37 @@ public class AStarManager : MonoBehaviour
     }
 
 
+    public List<Vector2> GetPath(Vector2 start, Vector2 end, Vector2 offset = default)
+    {
+        Vector2Int roundedStart = new Vector2Int(Mathf.RoundToInt(start.x), Mathf.RoundToInt(start.y));
+        Vector2Int roundedEnd = new Vector2Int(Mathf.RoundToInt(end.x), Mathf.RoundToInt(end.y));
 
+        List<Vector2Int> roundedPath = GetPath(roundedStart, roundedEnd);
+
+        if (offset == default)
+        {
+            offset = new Vector2(0.5f, 0.5f);
+        }
+
+        List<Vector2> path = new List<Vector2>(roundedPath.Count);
+        for (int i = 0; i < roundedPath.Count; i++)
+        {
+            // If this tile is the start or end, use the exact position
+            if (i == 0)
+            {
+                path.Add(start);
+            }
+            else if (i == roundedPath.Count - 1)
+            {
+                path.Add(end);
+            }
+            else
+            {
+                path.Add(new Vector2(roundedPath[i].x, roundedPath[i].y) + offset);
+            }
+        }
+        return path;
+    }
     public List<Vector2Int> GetPath(Vector2Int start, Vector2Int end)
     {
         List<Vector2Int> path = new List<Vector2Int>();
@@ -237,13 +288,13 @@ public class AStarManager : MonoBehaviour
 
         if (!Tiles.tiles.ContainsKey(start) || !Tiles.tiles.ContainsKey(end))
         {
-            Debug.LogWarning($"Start or end tile is not in the tilemap");
+            Debug.LogWarning($"Start ({!Tiles.tiles.ContainsKey(start)}) or end ({!Tiles.tiles.ContainsKey(end)}) tile is not in the tilemap. Start:{start}, End: {end}");
             return path;
         }
 
         if (!Tiles.tiles[start].IsWalkable || !Tiles.tiles[end].IsWalkable)
         {
-            Debug.LogWarning($"Start or end tile is not walkable");
+            Debug.LogWarning($"Start ({!Tiles.tiles[start].IsWalkable}) or end ({!Tiles.tiles[end].IsWalkable}) tile is not walkable. Start:{start}, End: {end}");
             return path;
         }
 
