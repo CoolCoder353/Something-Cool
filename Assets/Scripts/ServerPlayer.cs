@@ -33,6 +33,8 @@ public class ServerData
 {
     public float resources = 0;
 
+    List<UnitGroup> unitGroups = new List<UnitGroup>();
+
     public static string Serialize(ServerData data)
     {
         return JsonConvert.SerializeObject(data);

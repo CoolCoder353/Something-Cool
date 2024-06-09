@@ -43,7 +43,7 @@ public class UnitGroup
         lastGoals = goals;
     }
 }
-public class UnitManager : MonoBehaviour
+public class TestUnitManager : MonoBehaviour
 {
 
     public Sprite dragBoxSprite;
@@ -69,7 +69,7 @@ public class UnitManager : MonoBehaviour
     public int numberOfTestPoints = 100;
 
     [ShowIf("debugMode"), Header("Debug Settings")]
-    public float spacingFactor = 1.0f;
+    public float spacingFactor = 2.0f;
 
     [ShowIf("showPath"), Header("Debug Settings")]
     public Vector3 unitStartPosition = new Vector3(0, 0, 0);
@@ -80,7 +80,7 @@ public class UnitManager : MonoBehaviour
 
 
 
-    public UnitGroup testGroup = new UnitGroup();
+    private UnitGroup testGroup = new UnitGroup();
 
     [ShowIf("showTestPoints"), Button("Test Point Spreading")]
     public void TestPointSpreading()
@@ -141,10 +141,11 @@ public class UnitManager : MonoBehaviour
 
         }
 
-
-
-
     }
+
+
+
+
     public void OnDrawGizmosSelected()
     {
         if (showGizmos)

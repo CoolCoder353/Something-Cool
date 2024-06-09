@@ -25,7 +25,10 @@ public class ClientPlayer : NetworkBehaviour
     public void SetServerPlayer(NetworkConnectionToClient connection, string playerData)
     {
         serverPlayer = ServerData.Deserialize(playerData);
+
     }
+
+
 
     [Server]
     public NetworkConnectionToClient GetConnectionToClient()
