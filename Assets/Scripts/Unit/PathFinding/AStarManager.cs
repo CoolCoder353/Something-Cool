@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Mirror;
 
 
 
@@ -43,7 +44,7 @@ public class AStarManager : MonoBehaviour
     private List<Vector2Int> path;
 
 
-
+    [ServerCallback]
     private void Awake()
     {
         Instance = this;
@@ -59,7 +60,7 @@ public class AStarManager : MonoBehaviour
     }
 
 
-    [Button("Bake")]
+    [Button("Bake"), Server]
     public void Bake()
     {
         Instance = this;
@@ -244,7 +245,7 @@ public class AStarManager : MonoBehaviour
 
     }
 
-
+    [Server]
     public List<Vector2> GetPath(Vector2 start, Vector2 end, Vector2 offset = default)
     {
         Vector2Int roundedStart = new Vector2Int(Mathf.RoundToInt(start.x), Mathf.RoundToInt(start.y));
@@ -276,6 +277,8 @@ public class AStarManager : MonoBehaviour
         }
         return path;
     }
+
+    [Server]
     public List<Vector2Int> GetPath(Vector2Int start, Vector2Int end)
     {
         List<Vector2Int> path = new List<Vector2Int>();

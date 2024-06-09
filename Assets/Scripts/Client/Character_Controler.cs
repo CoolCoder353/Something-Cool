@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Mirror;
 namespace Character
 {
 
@@ -17,7 +17,7 @@ namespace Character
         private float scroll;
 
 
-
+        [ClientCallback]
         // Update is called once per frame
         void Update()
         {
@@ -48,7 +48,7 @@ namespace Character
 
         }
 
-
+        [ClientCallback]
         private void LateUpdate()
         {
             float CameraSize = gameObject.transform.position.z;

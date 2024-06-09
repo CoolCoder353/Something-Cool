@@ -32,7 +32,7 @@ public class Unit
 
     }
 
-
+    [Server]
     public void SetGoalPosition(Vector2 position, Vector2 offset = default)
     {
         if (offset == default) offset = new Vector2(0.5f, 0.5f);
@@ -41,7 +41,7 @@ public class Unit
         path = AStarManager.Instance.GetPath(pos, goalPosition);
 
     }
-
+    [Server]
     public void Move()
     {
         Vector2 currentPosition = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
@@ -93,6 +93,8 @@ public class Unit
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, path[0], speed * Time.deltaTime);
         }
     }
+
+    [Server]
     public void MoveWithRigidbody()
     {
         Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();
@@ -148,6 +150,7 @@ public class Unit
         }
     }
 
+    [Server]
     public void MoveWithVelocity()
     {
         Rigidbody2D rb = gameObject.GetComponent<Rigidbody2D>();

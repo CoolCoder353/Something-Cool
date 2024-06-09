@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
+using Mirror;
 
 
 public struct UnitGoal
@@ -16,7 +17,7 @@ public class UnitGroup
 
     public List<UnitGoal> lastGoals = new List<UnitGoal>();
 
-
+    [Server]
     public void SetGoalPosition(Vector2 position, float spacingFactor)
     {
         List<UnitGoal> goals = new List<UnitGoal>();
@@ -44,30 +45,36 @@ public class UnitGroup
 }
 public class UnitManager : MonoBehaviour
 {
-    public bool debugMode = true;
 
-    [ShowIf("debugMode")]
-    public bool showGizmos = true;
+    public Sprite dragBoxSprite;
 
-    [ShowIf("showGizmos")]
-    public bool showTestPoints = true;
 
-    [ShowIf("showGizmos")]
-    public bool showPath = true;
 
-    [ShowIf("showPath"), ShowAssetPreview(128, 128)]
+    [Header("Debug Settings")]
+    public bool debugMode = false;
+
+    [ShowIf("debugMode"), Header("Debug Settings")]
+    public bool showGizmos = false;
+
+    [ShowIf("showGizmos"), Header("Debug Settings")]
+    public bool showTestPoints = false;
+
+    [ShowIf("showGizmos"), Header("Debug Settings")]
+    public bool showPath = false;
+
+    [ShowIf("showPath"), ShowAssetPreview(128, 128), Header("Debug Settings")]
     public GameObject UnitPrefab;
 
-    [ShowIf("debugMode")]
+    [ShowIf("debugMode"), Header("Debug Settings")]
     public int numberOfTestPoints = 100;
 
-    [ShowIf("debugMode")]
+    [ShowIf("debugMode"), Header("Debug Settings")]
     public float spacingFactor = 1.0f;
 
-    [ShowIf("showPath")]
+    [ShowIf("showPath"), Header("Debug Settings")]
     public Vector3 unitStartPosition = new Vector3(0, 0, 0);
 
-    [ShowIf("debugMode")]
+    [ShowIf("debugMode"), Header("Debug Settings")]
     public Vector2Int TestGoalPosition = new Vector2Int(0, 0);
 
 
@@ -122,7 +129,7 @@ public class UnitManager : MonoBehaviour
 
     }
 
-
+    [ServerCallback]
     public void Update()
     {
         if (showPath)
@@ -133,6 +140,10 @@ public class UnitManager : MonoBehaviour
             }
 
         }
+
+
+
+
     }
     public void OnDrawGizmosSelected()
     {
