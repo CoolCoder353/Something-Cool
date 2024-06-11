@@ -127,4 +127,24 @@ public class ClientPlayer : NetworkBehaviour
 
         selectedUnits.SetGoalPosition(realPoint, 2.0f);
     }
+
+    [Command]
+    public void CmdSpawnBuilding(string buildingSettings, Vector2 vector2, NetworkConnectionToClient connection = null)
+    {
+
+        // Check if the player is talking with the right clientPlayer
+        if (connection != null && connection.identity != connectionToClient.identity)
+        {
+            Debug.LogWarning("Player is trying to spawn a building for another player.");
+            return;
+        }
+
+        if (buildingSettings == null)
+        {
+            return;
+        }
+
+        GameCore.Instance.SpawnBuilding(connectionToClient, buildingSettings, vector2);
+    }
+
 }

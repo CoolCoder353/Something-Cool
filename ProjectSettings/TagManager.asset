@@ -14,6 +14,7 @@ TagManager:
   - IPAddress
   - LobbyManager
   - Unit
+  - BuildingMap
   layers:
   - Default
   - TransparentFX
