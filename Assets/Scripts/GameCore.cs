@@ -26,6 +26,8 @@ public class GameCore : NetworkBehaviour
     /// </summary>
     private NetworkConnection serverOwner;
 
+    private Building_Settings[] buildingsData;
+
 
     /// <summary>
     /// A preloaded list of all building settings in the game.
@@ -52,13 +54,6 @@ public class GameCore : NetworkBehaviour
 
     }
 
-    [Server]
-    public override void OnStartServer()
-    {
-        base.OnStartServer();
-
-        serverBuildingSettings = new List<BuildingSettings>(Resources.LoadAll<BuildingSettings>("BuildingSettings"));
-    }
 
 
 
