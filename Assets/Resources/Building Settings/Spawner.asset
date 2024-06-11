@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef9c2731a36281f438144278397e4ef2, type: 3}
-  m_Name: Character_Settings
+  m_Script: {fileID: 11500000, guid: 364486edd532ce04b9f05a59dcc103d7, type: 3}
+  m_Name: Spawner
   m_EditorClassIdentifier: 
-  speed: 5
-  scrollSpeed: 250
-  shiftSpeedMultiplyer: 2.5
-  zoomScale: {x: -13, y: -1}
-  zoomSpeedScale: {x: 1, y: 25}
-  debug: 0
+  buildingName: Miner
+  prefab: {fileID: 0}
+  cost: 10
+  icon: {fileID: 0}

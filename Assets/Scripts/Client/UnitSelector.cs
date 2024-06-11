@@ -68,7 +68,7 @@ public class UnitSelector : MonoBehaviour
 
         Vector2 dragBoxSize = mousePosition - dragStartPosition;
 
-        Debug.Log($"Drag box size: {dragBoxSize}, mouse position: {mousePosition}, drag start position: {dragStartPosition}, Raw mouse position: {Input.mousePosition}");
+        ////Debug.Log($"Drag box size: {dragBoxSize}, mouse position: {mousePosition}, drag start position: {dragStartPosition}, Raw mouse position: {Input.mousePosition}");
 
         dragBox.transform.localScale = dragBoxSize;
         dragBox.transform.position = dragStartPosition + dragBoxSize / 2;
@@ -87,9 +87,11 @@ public class UnitSelector : MonoBehaviour
 
             if (collider.TryGetComponent<Unit>(out Unit unit))
             {
+                Debug.Log($"Found unit: {unit.name}, owned: {unit.isOwned}  ");
                 //If we own this unit, add it to the list
                 if (unit.isOwned)
                 {
+
                     selectedUnits.units.Add(unit);
                 }
 

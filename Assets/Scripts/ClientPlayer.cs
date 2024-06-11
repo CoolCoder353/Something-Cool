@@ -127,4 +127,21 @@ public class ClientPlayer : NetworkBehaviour
 
         selectedUnits.SetGoalPosition(realPoint, 2.0f);
     }
+
+    [Client]
+    public void ClientSpawnBuilding(Vector3 position, Quaternion rotation, string buildingName)
+    {
+        if (ClientCanEdit())
+        {
+            Debug.Log($"Client connection is {connectionToClient}");
+            CmdSpawnBuilding(position, rotation, buildingName);
+        }
+    }
+
+    [Command]
+    private void CmdSpawnBuilding(Vector3 position, Quaternion rotation, string buildingName, NetworkConnectionToClient connection = null)
+    {
+        Debug.Log($"Server connection is {connection}");
+        GameCore.Instance.CmdSpawnBuilding(position, rotation, buildingName, connection);
+    }
 }
