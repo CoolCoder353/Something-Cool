@@ -10,6 +10,8 @@ public class BuildingSettings : ScriptableObject
 
     public TileBase tile;
 
+    public TileBase blueprint;
+
     public int cost;
 
 
