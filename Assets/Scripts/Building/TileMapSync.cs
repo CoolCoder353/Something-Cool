@@ -69,9 +69,18 @@ public class TileMapSync : NetworkBehaviour
         }
     }
 
+    [Server]
+    public void UpdateTile(List<(Vector3Int, string)> tiles)
+    {
+        foreach ((Vector3Int position, string tilename) in tiles)
+        {
+            UpdateTile(position, tilename);
+        }
+    }
+
 
     [TargetRpc]
-    public void UpdateTileMap(NetworkConnection connection, Vector3Int position, string tilename, int TileCount)
+    public void UpdateTileMap(NetworkConnection connection, Vector3Int position, string tilename, int TileCount, bool checkCount = true)
     {
         if (!buildingSettings.Exists(x => x.buildingName == tilename))
         {
@@ -84,8 +93,20 @@ public class TileMapSync : NetworkBehaviour
 
         Debug.Log("Updated tilemap");
 
-        CheckCount(TileCount);
+        if (checkCount) CheckCount(TileCount);
     }
+
+    [TargetRpc]
+    public void UpdateTileMap(NetworkConnection connection, List<(Vector3Int, string)> tiles, int TileCount, bool checkCount = true)
+    {
+        foreach ((Vector3Int position, string tilename) in tiles)
+        {
+            UpdateTileMap(connection, position, tilename, TileCount, false);
+        }
+
+        if (checkCount) CheckCount(TileCount);
+    }
+
 
     private bool CheckCount(int TileCount)
     {

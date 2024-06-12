@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 364486edd532ce04b9f05a59dcc103d7, type: 3}
   m_Name: Spawner
   m_EditorClassIdentifier: 
-  buildingName: Miner
+  buildingName: Spawner
   prefab: {fileID: 0}
-  cost: 10
+  cost: 100
   icon: {fileID: 0}
