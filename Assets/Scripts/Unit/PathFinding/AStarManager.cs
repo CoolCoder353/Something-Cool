@@ -314,7 +314,7 @@ public class AStarManager : MonoBehaviour
         PathObject pathObject = AStar.FindPath(copy, start, end);
         path = pathObject.path;
 
-        if (path.Count == 0)
+        if (path == null || path.Count == 0)
         {
             Debug.LogWarning($"Could not find path from {start} to {end}");
             return null;

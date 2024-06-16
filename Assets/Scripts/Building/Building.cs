@@ -1,7 +1,7 @@
 using UnityEngine;
 using Mirror;
 
-public class Building : NetworkBehaviour
+public class Building : Health
 {
     public bool isPreview = false;
 
