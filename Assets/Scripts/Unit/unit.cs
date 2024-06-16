@@ -96,7 +96,7 @@ public class Unit : Health
             return;
         }
         //Raycast to check if we hit the target, based on hit chance, Where 1 is 100% and 0 is 0%
-        if (UnityEngine.Random.value >= accuracy)
+        if (UnityEngine.Random.value <= accuracy)
         {
             //Check if there is a wall between us
             RaycastHit2D hit = Physics2D.Raycast(gameObject.transform.position, health.gameObject.transform.position - gameObject.transform.position, attackRange);

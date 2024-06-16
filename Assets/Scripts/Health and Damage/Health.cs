@@ -2,19 +2,20 @@ using UnityEngine;
 using Mirror;
 using System;
 using UnityEngine.UI;
+using NaughtyAttributes;
 
 
 public class Health : NetworkBehaviour
 {
-    [ShowInInspector]
-    private float maxHealth = 100;
-    [ShowInInspector]
+    [ShowNonSerializedField]
+    public float maxHealth = 100;
+    [ShowNonSerializedField]
     private bool isDead = false;
-    [ShowInInspector]
+    [ShowNonSerializedField]
     private bool destroyOnDead = true;
 
-    [SyncVar(hook = nameof(OnHealthChanged)), ShowInInspector]
-    private float currentHealth;
+    [SyncVar(hook = nameof(OnHealthChanged)), ShowNonSerializedField]
+    public float currentHealth;
 
 
     public Slider healthBar;

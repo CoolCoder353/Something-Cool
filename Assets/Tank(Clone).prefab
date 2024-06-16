@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4964314354356486959}
   - component: {fileID: 7648431444193144804}
   - component: {fileID: 8542650735687705119}
+  - component: {fileID: 1413969293665904674}
   m_Layer: 0
   m_Name: Tank(Clone)
   m_TagString: Unit
@@ -204,6 +205,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
+  maxHealth: 100
+  currentHealth: 100
   healthBar: {fileID: 2808764703827328673}
   speed: 1
   turningSpeed: 180
@@ -229,6 +232,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToToggle: {fileID: 7201195003979672966}
+--- !u!114 &1413969293665904674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7979010904455679390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a444b01c91eb949be6119cd04736c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  maxHealth: 100
+  currentHealth: 0
+  healthBar: {fileID: 0}
 --- !u!1001 &5350267098310530213
 PrefabInstance:
   m_ObjectHideFlags: 0
