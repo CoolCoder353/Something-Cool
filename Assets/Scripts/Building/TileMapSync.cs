@@ -65,7 +65,7 @@ public class TileMapSync : NetworkBehaviour
         //TODO: Make this different for each player based on what they can see. (Fog of War)
         foreach (NetworkConnection conn in NetworkServer.connections.Values)
         {
-            UpdateTileMap(conn, position, tilename, count);
+            UpdateTileMap(conn, position, tilename, count, true);
         }
     }
 
@@ -80,7 +80,7 @@ public class TileMapSync : NetworkBehaviour
 
 
     [TargetRpc]
-    public void UpdateTileMap(NetworkConnection connection, Vector3Int position, string tilename, int TileCount, bool checkCount = true)
+    public void UpdateTileMap(NetworkConnection connection, Vector3Int position, string tilename, int TileCount, bool checkCount)
     {
         if (!buildingSettings.Exists(x => x.buildingName == tilename))
         {
@@ -97,11 +97,17 @@ public class TileMapSync : NetworkBehaviour
     }
 
     [TargetRpc]
-    public void UpdateTileMap(NetworkConnection connection, List<(Vector3Int, string)> tiles, int TileCount, bool checkCount = true)
+    public void UpdateTileMap(NetworkConnection connection, List<Vector3Int> positions, List<string> tileNames, int TileCount, bool checkCount)
     {
-        foreach ((Vector3Int position, string tilename) in tiles)
+        if (positions.Count != tileNames.Count)
         {
-            UpdateTileMap(connection, position, tilename, TileCount, false);
+            Debug.LogError("Positions and tile names do not match.");
+            return;
+        }
+
+        for (int i = 0; i < positions.Count; i++)
+        {
+            UpdateTileMap(connection, positions[i], tileNames[i], TileCount, false);
         }
 
         if (checkCount) CheckCount(TileCount);
