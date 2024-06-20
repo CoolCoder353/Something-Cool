@@ -7,6 +7,7 @@ public class TileMapSync : NetworkBehaviour
 {
     public static TileMapSync Instance { get; private set; }
     public Tilemap buildingTilemap;
+    public Tilemap resourceTilemap;
 
     private List<BuildingSettings> buildingSettings;
 
