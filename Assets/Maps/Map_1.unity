@@ -15404,6 +15404,7 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   buildingTilemap: {fileID: 1404695008}
+  resourceTilemap: {fileID: 0}
 --- !u!1 &1522663596
 GameObject:
   m_ObjectHideFlags: 0
@@ -22533,7 +22534,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 10
+      m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -30588,8 +30589,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 8
     m_Data: {fileID: -1239183922, guid: 669434db750756e4f80d8f27dabbc17d, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1492565444, guid: 669434db750756e4f80d8f27dabbc17d, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
   - m_RefCount: 7
@@ -30600,8 +30601,8 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: d8e64177ba49ca240ad50fd9346b34f5, type: 3}
   - m_RefCount: 6
     m_Data: {fileID: 21300000, guid: c57577f0cd08f504ba04107eca8cd342, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1492565444, guid: 669434db750756e4f80d8f27dabbc17d, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 989342927, guid: 1395742f12fa9344eabc601ff5298d0e, type: 3}
   - m_RefCount: 1
